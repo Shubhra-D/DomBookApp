@@ -1,0 +1,33 @@
+#nav{
+    background-color: darkmagenta;
+    margin:10px  0px 10px 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+a{
+    height:30px;
+    color:azure;
+    text-decoration: none;
+}
+#form-cont{
+    background-color: rgb(163, 100, 221);
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+#admin-form{
+    background-color: rgb(163, 100, 221);
+
+}
+#form-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}

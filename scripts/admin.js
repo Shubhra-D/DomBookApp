@@ -56,7 +56,36 @@ async function fetchBooks(){
 
 
         verifyButton.addEventListener("click",async()=>{
-            
+          if(confirm("Are you sure to Verify")){
+            const res = await fetch(`${baseurl}`,{
+                method:"PATCH",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({isVerified:true})
+            })
+            book.isVerified = true;
+            verifyButton.disabled = true;
+          }
         })
-    })
+         deleteButton.addEventListener("click",async()=>{
+            if(confirm("Are you sure to delete?")){
+                const res = await fetch(`${baseurl}`,{
+                    method:"DELETE"
+                })
+                bookcard.remove()
+            }
+
+         });
+      bookcard.appendChild(titleItm)
+      bookcard.appendChild(authorItm)
+       bookcard.appendChild(categoryItm)
+       bookcard.appendChild(availabilityItm)
+       bookcard.appendChild(verifyButton)
+       bookcard.appendChild(deleteButton)
+
+       addGrid.append(bookcard);
+    });
 }
+
+

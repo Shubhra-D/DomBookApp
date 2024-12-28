@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css"/>
+
+    <title>Admin Management Page</title>
+
+</head>
+<body>
+    <nav id="nav">
+        <a href="index.html">Home</a>
+        <a href="admin.html">Admin</a>
+        <a href="books.html">Books</a>
+     </nav>
+     <main>
+        <div id="admin-form">
+            <form id="form-admin">
+                <h2>Please Choose Fields</h2>
+                <input  id="title" type="text" placeholder="Title">
+                <input id="author" type="text" placeholder="Author">
+                
+                <select name="category" id="category">
+                    <option value="fiction">Fiction</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="technical">Technical</option>
+                </select>
+                <button id="bookie">Add Book</button>
+            </form>
+        </div>
+        <div id="add-grid"></div>
+     </main>
+
+</body>
+<script src="./scripts/navbar.js" type="module"></script>
+<script src="./scripts/baseurl.js" type="module"></script>
+<script src="./scripts/admin.js" type="module"></script>
+</html>

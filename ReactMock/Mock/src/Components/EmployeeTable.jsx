@@ -2,17 +2,24 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import '../styles/EmployeeTable.css'
 import AddEmployees from './AddEmployees';
+import FilterDropdown from './FilterDropdown';
 
 const EmployeeTable = () => {
   const [employees,setEmployees] = useState([]);
   const [isLoading,setIsLoading] = useState(false);
+  const [filteredEmployee,setFilteredEmployee] = useState([]);
+  //inititally filtered data is zero
+  const [departmentFilter,setDepartmentFilter] = useState(0)
   
   const fetchEmployee = ()=>{
     setIsLoading(true)
     axios({
         url:`http://localhost:3000/employees`,
         method:"GET"
-    }).then((res)=>setEmployees(res.data))
+    }).then((res)=>{
+        setEmployees(res.data)
+        setFilteredEmployee(res.data)
+    })
     .catch((err)=>err.response ? err.response.data:err.response)
     .finally(()=>{
         setIsLoading(false)
@@ -22,6 +29,14 @@ const EmployeeTable = () => {
   useEffect(()=>{
     fetchEmployee()
   },[])
+  //updating or rerendering phase of that data
+  useEffect(()=>{
+      let filtered = [...employees];
+    if(departmentFilter){
+        filtered = filtered.filter((e)=>e.department==departmentFilter)
+    }//key department==departmentFilter
+    setFilteredEmployee(filtered)
+  },[departmentFilter])
   
   
     return (
@@ -30,6 +45,9 @@ const EmployeeTable = () => {
     ):(
         <div>
             <h2>Employees Table</h2>
+            <FilterDropdown 
+               handleDepartment= {(departmentf) =>setDepartmentFilter(departmentf)}
+            />
             <table>
                 <thead>
                     <tr>
@@ -40,7 +58,7 @@ const EmployeeTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    {employees.map((e)=>{
+                    {filteredEmployee.map((e)=>{
                         return(
                             <tr key={e.id}>
                                <td>{e.id}</td>
@@ -52,7 +70,7 @@ const EmployeeTable = () => {
                     })}
                 </tbody>
             </table>
-
+    
         </div>
     )}
     <AddEmployees onAdd={fetchEmployee}/>
@@ -62,3 +80,14 @@ const EmployeeTable = () => {
 }
 
 export default EmployeeTable;
+
+
+
+
+
+
+
+
+
+
+
